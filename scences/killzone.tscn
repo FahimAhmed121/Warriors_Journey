@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://c286h5jkqjbdt"]
+
+[ext_resource type="Script" uid="uid://deqxmn3jjmcvh" path="res://scripts/killzone.gd" id="1_p6vru"]
+[ext_resource type="AudioStream" uid="uid://darefw2ox2wiu" path="res://assets/sounds/game-over.mp3" id="2_vsrtk"]
+
+[node name="killzone" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_p6vru")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
+[node name="gameOverSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_vsrtk")
+max_distance = 8000.0
+bus = &"SFX"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
